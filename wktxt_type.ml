@@ -1,28 +1,33 @@
-type document = fragment list
+type document = block list
 [@@deriving show]
 
 (*
 	Un block peut contenir des inlines mais pas d'autres blocks
-	Un inline peut être vide ou contenir un autre inline.
+	Un inline peut être vide ou contenir un autre inline ou simplement une string.
 
 	Les blocs identifiés ici sont :
 		Header, List, Numlist, Paragraph, Definition, Blockquote, (Table, align?)
 	
 	Les inlines sont par exemple les chaines de caractères Bold, italic, ou smallcaps, etc
+
+	renommer "inline" en "block" et créer un type "inline" ?
 *)
 
-and fragment =
-  | Header of int * fragment list
-  | List of fragment list 
-  | Numlist of int * fragment list 
-  | Paragraph of fragment list
-  | Definition of fragment list * fragment list
-  | Blockquote of fragment list
-  | Table of fragment list list
-  | Italic of fragment list
-  | Bold of fragment list
-  | String of string
-  | Char of char
+and block =
+  | Header of int * inline list
+  | List of inline list 
+  | Numlist of int * inline list 
+  | Paragraph of inline list
+  | Definition of inline list * inline list
+  | Blockquote of inline list
+  | Table of inline list list
+[@@deriving show]
+
+and inline = 
+  | Italic of inline list
+  | Bold of inline list
+  | Smallcaps of inline list
+  | String of string 
 [@@deriving show]
 (* [@@deriving show] va créer automatique les fonctions
-   [show_document], [show_fragment], ... *)
+   [show_document], [show_inline], ... *)
