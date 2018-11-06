@@ -2,9 +2,9 @@
     open Wktxt_type
 %}
 
-%token<int> HEADER
-%token<string> STRING
-%token<char> CHAR
+%token <int> HEADER
+%token <string> STRING
+%token <char> CHAR
 %token EOF
 
 %start document
@@ -13,17 +13,32 @@
 %%
 
 document:
+  | EOF { None }
+  | b = blocks EOF { b }
+  ;
+
+blocks:
+  | TODO
+  ;
+(*
+document:
 | EOF { [] }
-| fragments EOF { $1 }
+| blocks EOF { $1 }
 ;
 
-fragments:
-| fragment { [$1] }
-| fragment fragments { $1 :: $2 }
+blocks:
+| block { [$1] }
+| block blocks { $1 :: $2 }
 ;
 
-fragment:
-| HEADER fragments { Header ($1, $2) }
+block:
+| HEADER inline { Header ($1, $2) }
+;
+
+inline:
 | STRING { String $1 }
 | CHAR { Char $1 }
 ;
+*)
+
+%%

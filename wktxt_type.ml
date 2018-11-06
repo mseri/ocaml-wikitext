@@ -28,6 +28,7 @@ and inline =
   | Bold of inline list
   | Smallcaps of inline list
   | String of string 
+  | Char of char
 [@@deriving show]
 (* [@@deriving show] va créer automatique les fonctions
    [show_document], [show_inline], ... *)
