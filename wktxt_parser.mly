@@ -2,10 +2,28 @@
     open Wktxt_type
 %}
 
-%token <int> HEADER
+%token <int> HEAD
+%token <int> LIST
+%token <int> NUMLIST
+%token BLOCKQUOTE_START
+%token BLOCKQUOTE_END
+%token TERM
+%token DEF
+%token BOLD
+%token ITALIC
+%token HR
+%token EMPTY
 %token <string> STRING
-%token <char> CHAR
 %token EOF
+
+(* LATER
+
+%token SMALLCAPS    (*HOW TO??*)
+%token TABLE
+%token TABLE_NAME
+%token TABLE_CONTENT
+
+*)
 
 %start document
 %type <Wktxt_type.document> document
