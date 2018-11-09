@@ -26,9 +26,25 @@
 }
 
 rule main = parse
+    | white { read lexbuf }
+    | header_str as s {
+        token_or_str (s, HEAD(String.length s))
+    }
+    | list_str as s {
+    | cr {
+        print_endline __LOC__ ;
+        Lexing.new_line lexbuf ;
+        newline := true ;
+        main lexbuf
+    }
+     (*TODO*)
+  }
+
+(*
+rule main = parse
 
   | '='+ as s {
-      token_or_str (s, HEADER (String.length s))
+      token_or_str (s, HEAD(String.length s))
     }
 
   | '\n' {
@@ -45,3 +61,4 @@ rule main = parse
   | eof {
       EOF
     }
+*)
