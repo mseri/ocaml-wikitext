@@ -43,11 +43,26 @@ block:
     | BLOCKQUOTE_START i = inline BLOCKQUOTE_END { Blockquote i }
     ;
 
-inline:
-    | BOLD i = inline BOLD { Bold i }
-    | ITALIC i = inline ITALIC { Italic i }
-    | TERM i = inline { Term_content i }
-    | DEF i = inline { Term_def i }
+regular:
+    | BOLD i = inline(bold)+ BOLD { Bold i }
+    | ITALIC i = inline(italic)+ ITALIC { Italic i }
+    | STRIKE i = inline(strike)+ STRIKE { Strike i }
+
+bold:
+    | ITALIC i = inline(italic)+ ITALIC { Italic i }
+    | STRIKE i = inline(strike)+ STRIKE { Strike i }
+
+italic:
+    | BOLD i = inline(bold)+ BOLD { Bold i }
+    | STRIKE i = inline(strike)+ STRIKE { Strike i }
+
+strike:
+    | BOLD i = inline(bold)+ BOLD { Bold i }
+    | ITALIC i = inline(italic)+ ITALIC { Italic i }
+
+inline(param):
+    | PLAIN { Plain $1 }
+    | param { $1 }
     | s = STRING { String s }
     | _
     ;
