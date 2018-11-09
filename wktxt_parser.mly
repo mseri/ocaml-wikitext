@@ -7,12 +7,11 @@
 %token <int> NUMLIST
 %token BLOCKQUOTE_START
 %token BLOCKQUOTE_END
-%token TERM
-%token DEF
+%token STRIKE
 %token BOLD
 %token ITALIC
 %token HR
-%token EMPTY
+%token EMPTYLINE
 %token <string> STRING
 %token EOF
 
@@ -22,6 +21,8 @@
 %token TABLE
 %token TABLE_NAME
 %token TABLE_CONTENT
+%token TERM
+%token DEF
 
 *)
 
