@@ -31,13 +31,27 @@
 %%
 
 document:
-  | EOF { None }
-  | b = blocks EOF { b }
-  ;
+    | EOF { None }
+    | b = block* EOF { b }
+    ;
 
-blocks:
-  | TODO
-  ;
+block:
+    | t = HEAD i = inline { Header (t, i) }
+    | t = LIST i = inline { List (t, i) }
+    | t = NUMLIST i = inline { Numlist (t, i) }
+    | BLOCKQUOTE_START i = inline BLOCKQUOTE_END { Blockquote i }
+    ;
+
+inline:
+    | BOLD i = inline BOLD { Bold i }
+    | ITALIC i = inline ITALIC { Italic i }
+    | TERM i = inline { Term_content i }
+    | DEF i = inline { Term_def i }
+    | s = STRING { String s }
+    | _
+    ;
+%%
+
 (*
 document:
 | EOF { [] }
