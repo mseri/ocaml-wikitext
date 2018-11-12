@@ -16,14 +16,14 @@
         end
 }
 
-    let cr = '\n'
-    let white = [ ' ' '\t' ]
-    let header_str = '='+
-    let list_str = '*'+
-    let numlist_str = '#'+
-    let indent_str = ':'+
-    let definition_term = ';'
-    let definition_def = ':'
+let cr = '\n'
+let white = [ ' ' '\t' ]
+let header_str = '='+
+let list_str = '*'+
+let numlist_str = '#'+
+let indent_str = ':'+
+let definition_term = ';'
+let definition_def = ':'
 
 rule main = parse
     | header_str as s {
