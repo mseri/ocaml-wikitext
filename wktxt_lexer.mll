@@ -24,6 +24,10 @@ let numlist_str = '#'+
 let indent_str = ':'+
 let definition_term = ';'
 let definition_def = ':'
+let italic = "''"
+let bold = "'''"
+let blockquote_start = "<blockquote>"
+let blockquote_end = "</blockquote>"
 
 rule main = parse
     | header_str as s {
