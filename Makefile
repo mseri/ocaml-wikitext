@@ -1,5 +1,5 @@
 
-.PHONY: all test doc install uninstall clean example
+.PHONY: all test doc install uninstall clean example re retest
 
 build:
 	dune build wktxt_cmdline.exe
@@ -9,3 +9,7 @@ test: build
 
 clean:
 	dune clean
+
+re: clean build
+
+retest: clean test
