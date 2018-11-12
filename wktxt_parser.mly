@@ -63,10 +63,8 @@ strike:
     | ITALIC i = inline(italic)+ ITALIC { Italic i }
 
 inline(param):
-    | PLAIN { Plain $1 }
     | param { $1 }
-    | s = STRING { String s }
-    | _
+    | s = STRING { String s }
     ;
 %%
 
@@ -90,5 +88,3 @@ inline:
 | CHAR { Char $1 }
 ;
 *)
-
-%%
