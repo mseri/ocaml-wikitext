@@ -26,19 +26,17 @@
     let definition_def = ':'
 
 rule main = parse
-    | white { read lexbuf }
     | header_str as s {
         token_or_str (s, HEAD(String.length s))
     }
-    | list_str as s {
     | cr {
         print_endline __LOC__ ;
         Lexing.new_line lexbuf ;
         newline := true ;
         main lexbuf
     }
-     (*TODO*)
-  }
+    | white { main lexbuf }
+    | eof { EOF }
 
 (*
 rule main = parse
