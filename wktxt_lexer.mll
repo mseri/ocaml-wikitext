@@ -2,15 +2,6 @@
     open Wktxt_parser
 
     let newline = ref true
-    let white = [ ' ' '\t' ]+
-    let empty_line = [white* '\n']+
-    let cr = '\n'
-    let header_str = '='+
-    let list_str = '*'+
-    let numlist_str = '#'+
-    let indent_str = ':'+
-    let definition_term = ';'
-    let definition_def = ':'
 
 (* Retourne soit [String str], soit [token], suivant si on est en
      début de ligne ou pas.
@@ -24,6 +15,15 @@
             STRING str
         end
 }
+
+    let cr = '\n'
+    let white = [ ' ' '\t' ]
+    let header_str = '='+
+    let list_str = '*'+
+    let numlist_str = '#'+
+    let indent_str = ':'+
+    let definition_term = ';'
+    let definition_def = ':'
 
 rule main = parse
     | white { read lexbuf }
