@@ -32,16 +32,18 @@
 %%
 
 document:
-    | EOF { None }
     | b = block* EOF { b }
+    | EOF { [] }
     ;
 
 block:
-    | t = HEAD i = inline { Header (t, i) }
-    | t = LIST i = inline { List (t, i) }
-    | t = NUMLIST i = inline { Numlist (t, i) }
-    | BLOCKQUOTE_START i = inline BLOCKQUOTE_END { Blockquote i }
+    | t = HEAD i = inline(regular)+ { Header (t, i) }
+    | t = LIST i = inline(regular)+ { List (t, i) }
+    | t = NUMLIST i = inline(regular)+ { Numlist (t, i) }
+    | BLOCKQUOTE_START i = inline(regular)+ BLOCKQUOTE_END { Blockquote i }
     ;
+
+(* INLINES *)
 
 regular:
     | BOLD i = inline(bold)+ BOLD { Bold i }
