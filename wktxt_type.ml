@@ -28,6 +28,7 @@ and block =
 and inline = 
     | Italic of inline list
     | Bold of inline list
+    | Strike of inline list
     | Smallcaps of inline list
     | List_content of inline list
     | Numlist_content of inline list
